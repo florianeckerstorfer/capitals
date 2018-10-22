@@ -1,9 +1,8 @@
-import ICountry from "./ICountry";
-import Question from "./Question";
+import { COUNTRY_QUESTION } from "../constants/questions";
+import IQuestion from "./IQuestion";
 
-interface ICountryQuestion {
-  country: ICountry;
-  question: Question;
+interface ICountryQuestion extends IQuestion {
+  type: COUNTRY_QUESTION;
 }
 
 export default ICountryQuestion;

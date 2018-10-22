@@ -1,12 +1,12 @@
+import IAnswer from "./IAnswer";
 import ICountry from "./ICountry";
-import ICountryAnswer from "./ICountryAnswer";
-import ICountryQuestion from "./ICountryQuestion";
+import IQuestion from "./IQuestion";
 
 interface IStoreState {
-  answeredCountries: ICountryAnswer[];
+  answers: IAnswer[];
   points: number;
   countries: ICountry[];
-  countryQuestions: ICountryQuestion[];
+  questions: IQuestion[];
 }
 
 export default IStoreState;

@@ -1,9 +1,10 @@
-import { CountryAction } from "src/actions";
+import { CountryAction } from "../actions";
 import {
   ADD_COUNTRY,
-  ADD_COUNTRY_QUESTION,
+  ADD_QUESTION,
   ANSWER_QUESTION
 } from "../constants/actions";
+import { CAPITAL_QUESTION, COUNTRY_QUESTION } from "../constants/questions";
 import IStoreState from "../types/IStoreState";
 
 export default function country(
@@ -14,23 +15,21 @@ export default function country(
     case ADD_COUNTRY:
       return { ...state, countries: state.countries.concat([action.country]) };
 
-    case ADD_COUNTRY_QUESTION:
+    case ADD_QUESTION:
       return {
         ...state,
-        countryQuestions: state.countryQuestions.concat([action.question])
+        questions: state.questions.concat([action.question])
       };
 
     case ANSWER_QUESTION:
       const correct =
-        (action.question.question === "capital" &&
+        (action.question.type === CAPITAL_QUESTION &&
           action.question.country.capital === action.answer) ||
-        (action.question.question === "country" &&
-          action.question.country.country === action.answer);
+        (action.question.type === COUNTRY_QUESTION &&
+          action.question.country.name === action.answer);
       return {
         ...state,
-        answeredCountries: state.answeredCountries.concat([
-          { question: action.question, correct }
-        ]),
+        answers: state.answers.concat([{ question: action.question, correct }]),
         points: state.points + (correct ? 1 : 0)
       };
   }

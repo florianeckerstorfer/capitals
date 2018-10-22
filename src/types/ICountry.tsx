@@ -1,5 +1,5 @@
 interface ICountry {
-  country: string;
+  name: string;
   capital: string;
 }
 

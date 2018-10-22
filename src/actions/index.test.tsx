@@ -1,32 +1,62 @@
 import * as actions from "../constants/actions";
-import { addCountry, addCountryQuestion, answerQuestion } from "./index";
+import { CAPITAL_QUESTION, COUNTRY_QUESTION } from "../constants/questions";
+import { addCountry, addQuestion, answerQuestion } from "./index";
+
+const austria = { name: "Austria", capital: "Vienna" };
+
+const options = ["Switzerland", "Austria", "Germany", "Australia"];
 
 test("addCountry() should return ADD_COUNTRY action", () => {
-  const action = addCountry("Austria", "Vienna");
+  const action = addCountry(austria.name, austria.capital);
   expect(action.type).toBe(actions.ADD_COUNTRY);
-  expect(action.country.country).toBe("Austria");
-  expect(action.country.capital).toBe("Vienna");
+  expect(action.country.name).toBe(austria.name);
+  expect(action.country.capital).toBe(austria.capital);
 });
 
-test("addCountryQuestion() should return ADD_COUNTRY_QUESTION action", () => {
-  const action = addCountryQuestion(
-    { country: "Austria", capital: "Vienna" },
-    "country"
-  );
-  expect(action.type).toBe(actions.ADD_COUNTRY_QUESTION);
-  expect(action.question.country.country).toBe("Austria");
-  expect(action.question.country.capital).toBe("Vienna");
-  expect(action.question.question).toBe("country");
+test("addQuestion() should return ADD_QUESTION action for COUNTRY_QUESTION", () => {
+  const action = addQuestion(austria, options, COUNTRY_QUESTION);
+  expect(action.type).toBe(actions.ADD_QUESTION);
+  expect(action.question.country.name).toBe(austria.name);
+  expect(action.question.country.capital).toBe(austria.capital);
+  expect(action.question.type).toBe(COUNTRY_QUESTION);
 });
 
-test("answerQuestion() should return ANSWER_QUESTION action", () => {
+test("addQuestion() should return ADD_QUESTION action for CAPITAL_QUESTION", () => {
+  const action = addQuestion(austria, options, CAPITAL_QUESTION);
+  expect(action.type).toBe(actions.ADD_QUESTION);
+  expect(action.question.country.name).toBe(austria.name);
+  expect(action.question.country.capital).toBe(austria.capital);
+  expect(action.question.type).toBe(CAPITAL_QUESTION);
+});
+
+test("answerQuestion() should return ANSWER_QUESTION action for COUNTRY_QUESTION", () => {
   const action = answerQuestion(
-    { country: { country: "Austria", capital: "Vienna" }, question: "capital" },
-    "Vienna"
+    {
+      country: austria,
+      options: ["Switzerland", "Austria", "Germany", "Australia"],
+      type: COUNTRY_QUESTION
+    },
+    austria.name
   );
   expect(action.type).toBe(actions.ANSWER_QUESTION);
-  expect(action.question.country.country).toBe("Austria");
-  expect(action.question.country.capital).toBe("Vienna");
-  expect(action.question.question).toBe("capital");
-  expect(action.answer).toBe("Vienna");
+  expect(action.question.country.name).toBe(austria.name);
+  expect(action.question.country.capital).toBe(austria.capital);
+  expect(action.question.type).toBe(COUNTRY_QUESTION);
+  expect(action.answer).toBe(austria.name);
+});
+
+test("answerQuestion() should return ANSWER_QUESTION action for CAPITAL_QUESTION", () => {
+  const action = answerQuestion(
+    {
+      country: austria,
+      options,
+      type: CAPITAL_QUESTION
+    },
+    austria.capital
+  );
+  expect(action.type).toBe(actions.ANSWER_QUESTION);
+  expect(action.question.country.name).toBe(austria.name);
+  expect(action.question.country.capital).toBe(austria.capital);
+  expect(action.question.type).toBe(CAPITAL_QUESTION);
+  expect(action.answer).toBe(austria.capital);
 });
