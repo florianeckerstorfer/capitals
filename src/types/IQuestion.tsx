@@ -1,6 +1,10 @@
+import { QUESTION_TYPE } from "../constants/questions";
+import ICountry from "./ICountry";
+
 interface IQuestion {
-  question: string;
-  answer: string;
+  country: ICountry;
+  options: string[];
+  type: QUESTION_TYPE;
 }
 
 export default IQuestion;
