@@ -1,26 +1,29 @@
-import * as React from "react";
-import "./App.css";
-import CountryQuestion from "./components/CountryQuestion/CountryQuestion";
-import { COUNTRY_QUESTION } from "./constants/questions";
-import ICountryQuestion from "./types/ICountryQuestion";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { ISetCountries, setCountries } from './actions/countryActions';
+import './App.css';
+import countryData from './data/countries';
+import ICountry from './types/ICountry';
 
-class App extends React.PureComponent {
-  public render() {
-    const question: ICountryQuestion = {
-      country: { name: "Austria", capital: "Vienna" },
-      options: ["Australia", "Switzerland", "Germany", "Austria"],
-      type: COUNTRY_QUESTION
-    };
-    return (
-      <div className="app">
-        <CountryQuestion question={question} onAnswer={this.handleAnswer} />
-      </div>
-    );
-  }
-
-  private handleAnswer = () => {
-    console.log("anser");
-  };
+interface IProps {
+  setCountries: (countries: ICountry[]) => void;
 }
 
-export default App;
+export class App extends React.PureComponent<IProps> {
+  public componentDidMount() {
+    this.props.setCountries(countryData);
+  }
+  public render() {
+    return <div className="app">Capital Quiz</div>;
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<ISetCountries>) => ({
+  setCountries: (countries: ICountry[]) => dispatch(setCountries(countries)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(App);
