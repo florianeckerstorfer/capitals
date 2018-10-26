@@ -1,7 +1,9 @@
-import ICountry from './ICountry';
+import ICountryState from './IContryState';
+import IRoundState from './IRoundState';
 
 interface IStoreState {
-  countries: ICountry[];
+  country: ICountryState;
+  round: IRoundState;
 }
 
 export default IStoreState;
