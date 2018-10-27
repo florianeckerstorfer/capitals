@@ -11,7 +11,7 @@ test('Question should render question', () => {
     <Question question={question} round={1} questionIndex={0} />,
   );
   expect(component.exists()).toBeTruthy();
-  expect(component.find('.question').text()).toBe(
+  expect(component.find('.questionText').text()).toBe(
     'What is the capital of Austria?',
   );
 });
