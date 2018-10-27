@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import IRound from './IRound';
 
 interface IRoundState {

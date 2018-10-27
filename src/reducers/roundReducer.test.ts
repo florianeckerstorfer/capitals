@@ -1,4 +1,4 @@
-import { newRoundWithCountries } from '../actions/roundActions';
+import { answerQuestion, newRoundWithCountries } from '../actions/roundActions';
 import ICountry from '../types/ICountry';
 import IRoundState from '../types/IRoundState';
 import roundReducer from './roundReducer';
@@ -6,6 +6,21 @@ import roundReducer from './roundReducer';
 const initialState: IRoundState = {
   round: 0,
   rounds: [],
+};
+
+const question1 = {
+  answers: [
+    { answer: 'Vienna', correct: true },
+    { answer: 'Berlin', correct: false },
+  ],
+  question: 'Austria',
+};
+const question2 = {
+  answers: [
+    { answer: 'Paris', correct: true },
+    { answer: 'London', correct: false },
+  ],
+  question: 'Francce',
 };
 
 const countries: ICountry[] = [
@@ -22,7 +37,13 @@ const countries: ICountry[] = [
   { name: 'Ukraine', capital: 'Kiev', continents: ['Europe'] },
 ];
 
-test('roundReducer() should reduce NEW_ROUND action', () => {
+test('roundReducer() should handle initial state', () => {
+  const state: IRoundState = roundReducer();
+  expect(state.round).toBe(0);
+  expect(state.rounds.length).toBe(0);
+});
+
+test('roundReducer() should handle NEW_ROUND action', () => {
   const state: IRoundState = roundReducer(
     initialState,
     newRoundWithCountries(countries),
@@ -31,4 +52,91 @@ test('roundReducer() should reduce NEW_ROUND action', () => {
   expect(state.rounds.length).toBe(1);
   expect(state.rounds[0].id).toBe(1);
   expect(state.rounds[0].questions.length).toBe(10);
+});
+
+test('roundReducer() should handle ANSWER_QUESTION action for correct answer with more questions available', () => {
+  const state: IRoundState = {
+    round: 1,
+    rounds: [
+      {
+        active: true,
+        currentQuestion: 0,
+        id: 1,
+        points: 0,
+        questions: [question1, question2],
+      },
+    ],
+  };
+  const newState = roundReducer(state, answerQuestion(1, 0, 0));
+  expect(newState.round).toBe(1);
+  expect(newState.rounds[0].points).toBe(1);
+  expect(newState.rounds[0].currentQuestion).toBe(1);
+  expect(newState.rounds[0].active).toBeTruthy();
+});
+
+test('roundReducer() should handle ANSWER_QUESTION action for correct answer with no questions available', () => {
+  const state: IRoundState = {
+    round: 1,
+    rounds: [
+      {
+        active: true,
+        currentQuestion: 0,
+        id: 1,
+        points: 0,
+        questions: [question1],
+      },
+    ],
+  };
+  const newState = roundReducer(state, answerQuestion(1, 0, 0));
+  expect(newState.round).toBe(1);
+  expect(newState.rounds[0].points).toBe(1);
+  expect(newState.rounds[0].currentQuestion).toBe(0);
+  expect(newState.rounds[0].active).toBeFalsy();
+});
+
+test('roundReducer() should handle ANSWER_QUESTION action for incorrect answer', () => {
+  const state: IRoundState = {
+    round: 1,
+    rounds: [
+      {
+        active: true,
+        currentQuestion: 0,
+        id: 1,
+        points: 0,
+        questions: [question1, question2],
+      },
+    ],
+  };
+  const newState = roundReducer(state, answerQuestion(1, 0, 1));
+  expect(newState.round).toBe(1);
+  expect(newState.rounds[0].points).toBe(0);
+  expect(newState.rounds[0].currentQuestion).toBe(1);
+  expect(newState.rounds[0].active).toBeTruthy();
+});
+
+test('roundReducer() should handle ANSWER_QUESTION action for correct answer with multiple rounds', () => {
+  const state: IRoundState = {
+    round: 2,
+    rounds: [
+      {
+        active: true,
+        currentQuestion: 9,
+        id: 1,
+        points: 7,
+        questions: [question1],
+      },
+      {
+        active: true,
+        currentQuestion: 0,
+        id: 2,
+        points: 0,
+        questions: [question1, question2],
+      },
+    ],
+  };
+  const newState = roundReducer(state, answerQuestion(2, 0, 0));
+  expect(newState.round).toBe(2);
+  expect(newState.rounds[1].points).toBe(1);
+  expect(newState.rounds[1].currentQuestion).toBe(1);
+  expect(newState.rounds[1].active).toBeTruthy();
 });

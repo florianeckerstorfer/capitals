@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import countryReducer from './reducers/countryReducer';

@@ -8,7 +8,7 @@ export const initialState: ICountryState = {
 
 export default function countryReducer(
   state: ICountryState = initialState,
-  action: CountryAction,
+  action: CountryAction | { type: null } = { type: null },
 ): ICountryState {
   switch (action.type) {
     case ADD_COUNTRY:

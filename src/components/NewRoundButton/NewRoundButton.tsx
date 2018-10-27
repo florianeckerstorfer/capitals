@@ -11,9 +11,12 @@ interface IProps {
 
 type dispatchFunc = ThunkDispatch<IStoreState, {}, RoundAction>;
 
-export const NewRoundButton = ({ onClick }: IProps) => (
-  <Button onClick={onClick}>Start Round</Button>
-);
+export class NewRoundButton extends React.PureComponent<IProps> {
+  public render() {
+    const { onClick } = this.props;
+    return <Button onClick={onClick}>New Round</Button>;
+  }
+}
 
 export const mapDispatchToProps = (dispatch: dispatchFunc) => ({
   onClick: () => dispatch(newRound()),

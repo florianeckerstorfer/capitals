@@ -56,11 +56,12 @@ const handleAnswerQuestion = (
 
 const roundReducer = (
   state: IRoundState = initialState,
-  action: RoundAction,
+  action: RoundAction | { type: null } = { type: null },
 ): IRoundState => {
   switch (action.type) {
     case NEW_ROUND:
       return handleNewRound(state, action);
+
     case ANSWER_QUESTION:
       return handleAnswerQuestion(state, action);
   }

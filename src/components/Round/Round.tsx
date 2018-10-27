@@ -12,12 +12,17 @@ interface IOwnProps {
   round: number;
 }
 
-export const Round = ({ round }: IProps) => (
-  <div>
-    <h2>Round {round.id}</h2>
-    <Question round={round.id} question={round.currentQuestion} />
-  </div>
-);
+export class Round extends React.PureComponent<IProps> {
+  public render() {
+    const { round } = this.props;
+    return (
+      <div>
+        <h2>Round {round.id}</h2>
+        <Question round={round.id} question={round.currentQuestion} />
+      </div>
+    );
+  }
+}
 
 export const mapStateToProps = (
   { round: { rounds } }: IStoreState,

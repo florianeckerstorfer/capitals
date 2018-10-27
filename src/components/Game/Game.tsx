@@ -13,11 +13,13 @@ interface IProps {
 export const Game = ({ round, active, points }: IProps) => (
   <div>
     {active ? <Round round={round} /> : <NewRoundButton />}
-    <div>Points: {points}</div>
+    <div>
+      Points: <span className="points">{points}</span>
+    </div>
   </div>
 );
 
-const mapStateToProps = ({ round: { round, rounds } }: IStoreState) => ({
+export const mapStateToProps = ({ round: { round, rounds } }: IStoreState) => ({
   active: rounds.filter(value => value.id === round && value.active).length > 0,
   points: rounds.reduce((sum, current) => sum + current.points, 0),
   round,

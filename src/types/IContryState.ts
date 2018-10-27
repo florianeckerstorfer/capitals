@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import ICountry from './ICountry';
 
 interface ICountryState {

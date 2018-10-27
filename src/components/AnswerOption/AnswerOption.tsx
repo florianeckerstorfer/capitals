@@ -15,7 +15,7 @@ interface IProps {
   handleAnswer: (event: React.ChangeEvent) => void;
 }
 
-export const AnswerQuestion = ({
+export const AnswerOption = ({
   answer,
   handleAnswer,
   round,
@@ -38,7 +38,10 @@ export const AnswerQuestion = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch, ownProps: IOwnProps) => ({
+export const mapDispatchToProps = (
+  dispatch: Dispatch,
+  ownProps: IOwnProps,
+) => ({
   handleAnswer: () =>
     dispatch(
       answerQuestion(ownProps.round, ownProps.question, ownProps.position),
@@ -48,4 +51,4 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: IOwnProps) => ({
 export default connect(
   null,
   mapDispatchToProps,
-)(AnswerQuestion);
+)(AnswerOption);

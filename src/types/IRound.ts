@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import IQuestion from './IQuestion';
 
 interface IRound {
