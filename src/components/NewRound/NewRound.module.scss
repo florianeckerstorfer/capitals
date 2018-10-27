@@ -1,6 +1,12 @@
 .newRound {
   align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   padding: 1rem 0;
+}
+
+.introText {
+  line-height: 1.2;
+  margin: 0 0.5rem 1rem;
 }
