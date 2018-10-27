@@ -4,6 +4,7 @@ import IQuestion from '../../types/IQuestion';
 import IRound from '../../types/IRound';
 import IStoreState from '../../types/IStoreState';
 import AnswerOption from '../AnswerOption/AnswerOption';
+import * as css from './Question.module.scss';
 
 interface IProps {
   question: IQuestion;
@@ -18,7 +19,7 @@ interface IOwnProps {
 
 export const Question = ({ question, round, questionIndex }: IProps) => (
   <div>
-    <div className="questionText">
+    <div className={css.questionText}>
       What is the capital of {question.question}?
     </div>
     <ul>

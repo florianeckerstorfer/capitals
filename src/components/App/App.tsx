@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { ISetCountries, setCountries } from './actions/countryActions';
-import './App.css';
-import Game from './components/Game/Game';
-import countryData from './data/countries';
-import ICountry from './types/ICountry';
+import { ISetCountries, setCountries } from '../../actions/countryActions';
+import countryData from '../../data/countries';
+import ICountry from '../../types/ICountry';
+import Game from '../Game/Game';
+import * as css from './App.module.scss';
 
 interface IProps {
   setCountries: (countries: ICountry[]) => void;
@@ -17,7 +17,7 @@ export class App extends React.PureComponent<IProps> {
   }
   public render() {
     return (
-      <div className="app">
+      <div className={css.app}>
         <h1>Capital Quiz</h1>
         <Game />
       </div>
