@@ -5,7 +5,9 @@ import shuffle from './shuffle';
 
 const createAnswers = (answer: ICountry, countries: ICountry[]): IAnswer[] => {
   return [{ answer: answer.capital, correct: true }].concat(
-    shuffle(countries.filter(c => c.name !== answer.name)).slice(0, 3),
+    shuffle(countries.filter(c => c.name !== answer.name))
+      .slice(0, 3)
+      .map(c => ({ answer: c.capital, correct: false })),
   );
 };
 

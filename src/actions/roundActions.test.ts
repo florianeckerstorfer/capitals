@@ -1,6 +1,6 @@
 import * as actions from '../constants/actions';
 import ICountry from '../types/ICountry';
-import { newRound } from './roundActions';
+import { newRoundWithCountries } from './roundActions';
 
 const countries: ICountry[] = [
   { name: 'Austria', capital: 'Vienna' },
@@ -16,12 +16,8 @@ const countries: ICountry[] = [
   { name: 'Ukraine', capital: 'Kiev' },
 ];
 
-test('newRound() should return NEW_ROUND action', () => {
-  const dispatch = jest.fn();
-  const getState = jest.fn(() => ({
-    country: { countries },
-  }));
-  const action = newRound()(dispatch, getState);
+test('newRoundWithCountries() should return NEW_ROUND action', () => {
+  const action = newRoundWithCountries(countries);
   expect(action.type).toBe(actions.NEW_ROUND);
   expect(action.questions.length).toBe(10);
 });

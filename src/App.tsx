@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { ISetCountries, setCountries } from './actions/countryActions';
 import './App.css';
+import Game from './components/Game/Game';
 import countryData from './data/countries';
 import ICountry from './types/ICountry';
 
@@ -15,7 +16,12 @@ export class App extends React.PureComponent<IProps> {
     this.props.setCountries(countryData);
   }
   public render() {
-    return <div className="app">Capital Quiz</div>;
+    return (
+      <div className="app">
+        <h1>Capital Quiz</h1>
+        <Game />
+      </div>
+    );
   }
 }
 

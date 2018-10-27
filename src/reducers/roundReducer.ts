@@ -1,5 +1,9 @@
-import { INewRoundAction, RoundAction } from '../actions/roundActions';
-import { NEW_ROUND } from '../constants/actions';
+import {
+  IAnswerQuestion,
+  INewRoundAction,
+  RoundAction,
+} from '../actions/roundActions';
+import { ANSWER_QUESTION, NEW_ROUND } from '../constants/actions';
 import IRoundState from '../types/IRoundState';
 
 export const initialState: IRoundState = {
@@ -7,24 +11,60 @@ export const initialState: IRoundState = {
   rounds: [],
 };
 
-const handleNewRound = (state: IRoundState, action: INewRoundAction) => {
+const handleNewRound = (
+  state: IRoundState,
+  action: INewRoundAction,
+): IRoundState => {
   const id = state.round + 1;
   return {
     ...state,
     round: id,
-    rounds: state.rounds.concat([{ id, questions: action.questions }]),
+    rounds: state.rounds.concat([
+      {
+        active: true,
+        currentQuestion: 0,
+        id,
+        points: 0,
+        questions: action.questions,
+      },
+    ]),
   };
 };
 
-const actionMap = {
-  [NEW_ROUND]: handleNewRound,
+const handleAnswerQuestion = (
+  state: IRoundState,
+  action: IAnswerQuestion,
+): IRoundState => {
+  const answer = state.rounds.filter(round => round.id === action.round)[0]
+    .questions[action.question].answers[action.answer];
+  const rounds = state.rounds.map(round => {
+    if (round.id === action.round) {
+      return {
+        ...round,
+        active: round.currentQuestion + 1 < round.questions.length,
+        currentQuestion:
+          round.currentQuestion + 1 < round.questions.length
+            ? round.currentQuestion + 1
+            : round.currentQuestion,
+        points: round.points + (answer.correct ? 1 : 0),
+      };
+    }
+    return round;
+  });
+  return { ...state, rounds: [...rounds] };
 };
 
 const roundReducer = (
   state: IRoundState = initialState,
   action: RoundAction,
 ): IRoundState => {
-  return actionMap[action.type] ? actionMap[action.type](state, action) : state;
+  switch (action.type) {
+    case NEW_ROUND:
+      return handleNewRound(state, action);
+    case ANSWER_QUESTION:
+      return handleAnswerQuestion(state, action);
+  }
+  return state;
 };
 
 export default roundReducer;

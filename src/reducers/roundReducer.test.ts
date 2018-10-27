@@ -1,4 +1,4 @@
-import { newRound } from '../actions/roundActions';
+import { newRoundWithCountries } from '../actions/roundActions';
 import ICountry from '../types/ICountry';
 import IRoundState from '../types/IRoundState';
 import roundReducer from './roundReducer';
@@ -23,11 +23,9 @@ const countries: ICountry[] = [
 ];
 
 test('roundReducer() should reduce NEW_ROUND action', () => {
-  const dispatch = jest.fn();
-  const getState = jest.fn(() => ({ country: { countries } }));
   const state: IRoundState = roundReducer(
     initialState,
-    newRound()(dispatch, getState),
+    newRoundWithCountries(countries),
   );
   expect(state.round).toBe(1);
   expect(state.rounds.length).toBe(1);

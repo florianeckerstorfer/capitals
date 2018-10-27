@@ -1,0 +1,10 @@
+import { shallow } from 'enzyme';
+import * as React from 'react';
+import { NewRoundButton } from './NewRoundButton';
+
+test('NewRoundButton should render button to start new round', () => {
+  const handleClick = jest.fn();
+  const component = shallow(<NewRoundButton onClick={handleClick} />);
+  expect(component.exists()).toBeTruthy();
+  expect(component.dive().text()).toBe('Start Round');
+});

@@ -1,15 +1,15 @@
 import { CountryAction } from '../actions/countryActions';
 import { ADD_COUNTRY, SET_COUNTRIES } from '../constants/actions';
-import IStoreState from '../types/IStoreState';
+import ICountryState from '../types/IContryState';
 
-export const initialState: IStoreState = {
+export const initialState: ICountryState = {
   countries: [],
 };
 
 export default function countryReducer(
-  state: IStoreState = initialState,
+  state: ICountryState = initialState,
   action: CountryAction,
-): IStoreState {
+): ICountryState {
   switch (action.type) {
     case ADD_COUNTRY:
       return { ...state, countries: state.countries.concat([action.country]) };

@@ -1,8 +1,8 @@
 import { addCountry, setCountries } from '../actions/countryActions';
-import IStoreState from '../types/IStoreState';
+import ICountryState from '../types/IContryState';
 import countryReducer from './countryReducer';
 
-const initialState: IStoreState = {
+const initialState: ICountryState = {
   countries: [],
 };
 
