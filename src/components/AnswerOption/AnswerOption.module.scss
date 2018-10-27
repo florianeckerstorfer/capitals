@@ -1,3 +1,16 @@
+@import '../../constants/colors.scss';
+
 .answerOption {
   display: block;
+  padding: 0.5rem;
+
+  &.answered {
+    &.correct {
+      background-color: $wasabi;
+    }
+
+    &.notCorrect {
+      background-color: $carnation;
+    }
+  }
 }

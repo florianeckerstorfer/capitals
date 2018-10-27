@@ -9,7 +9,7 @@ test('AnswerOption should render answer option', () => {
   const component = shallow(
     <AnswerOption
       answer={answer}
-      handleAnswer={handleAnswer}
+      onAnswer={handleAnswer}
       position={0}
       question={0}
       round={1}
@@ -26,7 +26,7 @@ test('mapDispatchToProps() should map dispatch to props', done => {
     question: 0,
     round: 1,
   });
-  props.handleAnswer();
+  props.onAnswer();
   setTimeout(() => {
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch.mock.calls[0][0].type).toBe(ANSWER_QUESTION);

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -13,43 +14,62 @@ interface IOwnProps {
 
 interface IProps {
   answer: IAnswer;
-  handleAnswer: (event: React.ChangeEvent) => void;
+  onAnswer: () => void;
 }
 
-export const AnswerOption = ({
-  answer,
-  handleAnswer,
-  round,
-  question,
-  position,
-}: IProps & IOwnProps) => {
-  const id = `answer-${round}-${question}-${position}`;
-  const name = `anwser-${round}-${question}`;
-  return (
-    <label className={css.answerOption} htmlFor={id}>
-      <input
-        type="radio"
-        id={id}
-        name={name}
-        value={answer.answer}
-        onChange={handleAnswer}
-      />{' '}
-      {answer.answer}
-    </label>
-  );
-};
+interface IState {
+  answered: boolean;
+}
+
+export class AnswerOption extends React.PureComponent<
+  IProps & IOwnProps,
+  IState
+> {
+  constructor(props: IProps & IOwnProps) {
+    super(props);
+    this.state = { answered: false };
+  }
+
+  public render() {
+    const { answered } = this.state;
+    const { answer, round, question, position } = this.props;
+    const id = `answer-${round}-${question}-${position}`;
+    const name = `anwser-${round}-${question}`;
+    return (
+      <label
+        className={classNames(css.answerOption, {
+          [css.answered]: answered,
+          [css.correct]: answer.correct,
+          [css.notCorrect]: !answer.correct,
+        })}
+        htmlFor={id}
+      >
+        <input
+          type="radio"
+          id={id}
+          name={name}
+          value={answer.answer}
+          onChange={this.handleAnswer}
+        />{' '}
+        {answer.answer}
+      </label>
+    );
+  }
+
+  private handleAnswer = () => {
+    const { onAnswer } = this.props;
+    console.log('handleAnswer');
+    this.setState({ answered: true }, () => setTimeout(() => onAnswer(), 1000));
+  };
+}
 
 export const mapDispatchToProps = (
   dispatch: Dispatch,
   ownProps: IOwnProps,
 ) => ({
-  handleAnswer: () =>
-    setTimeout(
-      () =>
-        dispatch(
-          answerQuestion(ownProps.round, ownProps.question, ownProps.position),
-        ),
-      500,
+  onAnswer: () =>
+    dispatch(
+      answerQuestion(ownProps.round, ownProps.question, ownProps.position),
     ),
 });
 

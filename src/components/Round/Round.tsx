@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import IRound from '../../types/IRound';
 import IStoreState from '../../types/IStoreState';
 import Question from '../Question/Question';
+import * as css from './Round.module.scss';
 
 interface IProps {
   round: IRound;
@@ -17,7 +18,12 @@ export class Round extends React.PureComponent<IProps> {
     const { round } = this.props;
     return (
       <div>
-        <h2>Round {round.id}</h2>
+        <header className={css.header}>
+          <h2 className={css.title}>Round {round.id}</h2>
+          <div className={css.progress}>
+            {round.currentQuestion + 1} / {round.questions.length}
+          </div>
+        </header>
         <Question round={round.id} question={round.currentQuestion} />
       </div>
     );
