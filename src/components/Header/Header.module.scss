@@ -1,0 +1,16 @@
+@import '../../constants/colors.scss';
+
+.header {
+  background: $poison-purple;
+  color: $white;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.pageTitle {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+}

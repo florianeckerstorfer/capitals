@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { answerQuestion } from '../../actions/roundActions';
 import IAnswer from '../../types/IAnswer';
+import * as css from './AnswerOption.module.scss';
 
 interface IOwnProps {
   position: number;
@@ -25,7 +26,7 @@ export const AnswerOption = ({
   const id = `answer-${round}-${question}-${position}`;
   const name = `anwser-${round}-${question}`;
   return (
-    <label htmlFor={id}>
+    <label className={css.answerOption} htmlFor={id}>
       <input
         type="radio"
         id={id}
@@ -43,8 +44,12 @@ export const mapDispatchToProps = (
   ownProps: IOwnProps,
 ) => ({
   handleAnswer: () =>
-    dispatch(
-      answerQuestion(ownProps.round, ownProps.question, ownProps.position),
+    setTimeout(
+      () =>
+        dispatch(
+          answerQuestion(ownProps.round, ownProps.question, ownProps.position),
+        ),
+      500,
     ),
 });
 

@@ -5,6 +5,7 @@ import { ISetCountries, setCountries } from '../../actions/countryActions';
 import countryData from '../../data/countries';
 import ICountry from '../../types/ICountry';
 import Game from '../Game/Game';
+import Header from '../Header/Header';
 import * as css from './App.module.scss';
 
 interface IProps {
@@ -18,7 +19,7 @@ export class App extends React.PureComponent<IProps> {
   public render() {
     return (
       <div className={css.app}>
-        <h1>Capital Quiz</h1>
+        <Header />
         <Game />
       </div>
     );

@@ -18,13 +18,13 @@ interface IOwnProps {
 }
 
 export const Question = ({ question, round, questionIndex }: IProps) => (
-  <div>
+  <div className={css.question}>
     <div className={css.questionText}>
       What is the capital of {question.question}?
     </div>
-    <ul>
+    <ul className={css.answers}>
       {question.answers.map((answer, position) => (
-        <li key={answer.answer}>
+        <li key={answer.answer} className={css.answer}>
           <AnswerOption
             answer={answer}
             round={round}

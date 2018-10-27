@@ -6,7 +6,7 @@ import { Game, mapStateToProps } from './Game';
 test('Game should render game when no round is active', () => {
   const component = shallow(<Game round={0} active={false} points={7} />);
   expect(component.exists()).toBeTruthy();
-  expect(component.childAt(0).name()).toBe('Connect(NewRoundButton)');
+  expect(component.childAt(0).name()).toBe('NewRound');
   expect(component.find('.points').text()).toBe('7');
 });
 

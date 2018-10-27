@@ -1,2 +1,6 @@
+@import '../../constants/colors.scss';
+
 .app {
+  color: $pig-iron;
+  min-height: 100vh;
 }

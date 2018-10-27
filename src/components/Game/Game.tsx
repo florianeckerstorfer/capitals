@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import IStoreState from '../../types/IStoreState';
-import NewRoundButton from '../NewRoundButton/NewRoundButton';
+import NewRound from '../NewRound/NewRound';
 import Round from '../Round/Round';
 
 interface IProps {
@@ -12,7 +12,7 @@ interface IProps {
 
 export const Game = ({ round, active, points }: IProps) => (
   <div>
-    {active ? <Round round={round} /> : <NewRoundButton />}
+    {active ? <Round round={round} /> : <NewRound />}
     <div>
       Points: <span className="points">{points}</span>
     </div>

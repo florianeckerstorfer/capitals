@@ -1,4 +1,5 @@
-import * as React from "react";
+import * as React from 'react';
+import * as css from './Button.module.scss';
 
 interface IProps {
   children: string;
@@ -6,7 +7,9 @@ interface IProps {
 }
 
 const Button = ({ children, onClick }: IProps) => (
-  <button onClick={onClick}>{children}</button>
+  <button className={css.button} onClick={onClick}>
+    {children}
+  </button>
 );
 
 export default Button;
