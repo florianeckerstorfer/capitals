@@ -16,11 +16,13 @@ export type CountryAction = IAddCountry | ISetCountries;
 export const addCountry = (
   name: string,
   capital: string,
+  continents: string[],
   largestCity: string | undefined = undefined,
   secondLargestCity: string | undefined = undefined,
 ): IAddCountry => ({
   country: {
     capital,
+    continents,
     largestCity,
     name,
     secondLargestCity,

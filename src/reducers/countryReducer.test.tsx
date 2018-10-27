@@ -7,15 +7,22 @@ const initialState: ICountryState = {
 };
 
 test('countryReducer() should reduce ADD_COUNTRY action', () => {
-  const state = countryReducer(initialState, addCountry('Austria', 'Vienna'));
+  const state = countryReducer(
+    initialState,
+    addCountry('Austria', 'Vienna', ['Europe']),
+  );
   expect(state.countries.length).toBe(1);
   expect(state.countries[0].name).toBe('Austria');
   expect(state.countries[0].capital).toBe('Vienna');
 });
 
 test('countryReducer() should reudce SET_COUNTRIES action', () => {
-  const country1 = { name: 'Austria', capital: 'Vienna' };
-  const country2 = { name: 'Spain', capital: 'Madrid' };
+  const country1 = {
+    capital: 'Vienna',
+    continents: ['Europe'],
+    name: 'Austria',
+  };
+  const country2 = { name: 'Spain', capital: 'Madrid', continents: ['Europe'] };
   const state = countryReducer(
     initialState,
     setCountries([country1, country2]),

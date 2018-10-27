@@ -1,7 +1,8 @@
 interface ICountry {
-  name: string;
   capital: string;
+  continents: string[];
   largestCity?: string;
+  name: string;
   secondLargestCity?: string;
 }
 

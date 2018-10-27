@@ -3,13 +3,14 @@ import { addCountry, setCountries } from './countryActions';
 
 const austria = {
   capital: 'Vienna',
+  continents: ['Europe'],
   largestCity: 'Vienna',
   name: 'Austria',
   secondLargestCity: 'Graz',
 };
 
 test('addCountry() should return ADD_COUNTRY action', () => {
-  const action = addCountry(austria.name, austria.capital);
+  const action = addCountry(austria.name, austria.capital, austria.continents);
   expect(action.type).toBe(actions.ADD_COUNTRY);
   expect(action.country.name).toBe(austria.name);
   expect(action.country.capital).toBe(austria.capital);
@@ -21,6 +22,7 @@ test('addCountry() should return ADD_COUNTRY action with optional arguments', ()
   const action = addCountry(
     austria.name,
     austria.capital,
+    austria.continents,
     austria.largestCity,
     austria.secondLargestCity,
   );
@@ -32,8 +34,12 @@ test('addCountry() should return ADD_COUNTRY action with optional arguments', ()
 });
 
 test('setCountries() should return SET_COUNTRY action', () => {
-  const country1 = { name: 'Austria', capital: 'Vienna' };
-  const country2 = { name: 'Spain', capital: 'Madrid' };
+  const country1 = {
+    capital: 'Vienna',
+    continents: ['Europe'],
+    name: 'Austria',
+  };
+  const country2 = { name: 'Spain', capital: 'Madrid', continents: ['Europe'] };
   const action = setCountries([country1, country2]);
   expect(action.type).toBe(actions.SET_COUNTRIES);
   expect(action.countries.length).toBe(2);
