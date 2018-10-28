@@ -3,7 +3,7 @@ import * as React from 'react';
 import { ANSWER_QUESTION } from '../../constants/actions';
 import { AnswerOption, mapDispatchToProps } from './AnswerOption';
 
-test('AnswerOption should render answer option', () => {
+test('AnswerOption should render correct answer option', () => {
   const answer = { answer: 'Vienna', correct: true };
   const handleAnswer = jest.fn();
   const component = shallow(
@@ -16,7 +16,47 @@ test('AnswerOption should render answer option', () => {
     />,
   );
   expect(component.exists()).toBe(true);
-  expect(component.find('label').text()).toContain(answer.answer);
+  const label = component.find('label');
+  expect(label.text()).toContain(answer.answer);
+  expect(label.hasClass('correct')).toBeTruthy();
+  expect(label.hasClass('notCorrect')).toBeFalsy();
+});
+
+test('AnswerOption should render incorrect answer option', () => {
+  const answer = { answer: 'Vienna', correct: false };
+  const handleAnswer = jest.fn();
+  const component = shallow(
+    <AnswerOption
+      answer={answer}
+      onAnswer={handleAnswer}
+      position={0}
+      question={0}
+      round={1}
+    />,
+  );
+  expect(component.exists()).toBe(true);
+  const label = component.find('label');
+  expect(label.text()).toContain(answer.answer);
+  expect(label.hasClass('correct')).toBeFalsy();
+  expect(label.hasClass('notCorrect')).toBeTruthy();
+});
+
+test('AnswerOption should handle user selecting answer', () => {
+  const answer = { answer: 'Vienna', correct: true };
+  const handleAnswer = jest.fn();
+  const component = shallow(
+    <AnswerOption
+      answer={answer}
+      onAnswer={handleAnswer}
+      position={0}
+      question={0}
+      round={1}
+    />,
+  );
+  expect(component.find('label').hasClass('answered')).toBeFalsy();
+  const instance: AnswerOption = component.instance() as AnswerOption;
+  instance.handleAnswer();
+  expect(component.find('label').hasClass('answered')).toBeTruthy();
 });
 
 test('mapDispatchToProps() should map dispatch to props', done => {

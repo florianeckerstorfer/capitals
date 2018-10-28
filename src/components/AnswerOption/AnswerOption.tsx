@@ -56,9 +56,8 @@ export class AnswerOption extends React.PureComponent<
     );
   }
 
-  private handleAnswer = () => {
+  public handleAnswer = () => {
     const { onAnswer } = this.props;
-    console.log('handleAnswer');
     this.setState({ answered: true }, () => setTimeout(() => onAnswer(), 1000));
   };
 }
