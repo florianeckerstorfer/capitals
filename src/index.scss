@@ -1,0 +1,16 @@
+@import './fonts/source-sans/source-sans';
+
+html {
+  font-family: 'Source Sans', 'Seravek', 'Segoe UI', 'Roboto', system-ui,
+    -apple-system, BlinkMacSystemFont, sans-serif;
+
+  @supports (font-variation-settings: normal) {
+    font-family: 'Source Sans Variable', 'Seravek', 'Segoe UI', 'Roboto',
+      system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}

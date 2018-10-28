@@ -3,7 +3,7 @@ import * as css from './Header.module.scss';
 
 export const Header = () => (
   <header className={css.header}>
-    <div className={css.pageTitle}>Capitals</div>
+    <div className={css.pageTitle}>🏙️ Capitals</div>
   </header>
 );
 

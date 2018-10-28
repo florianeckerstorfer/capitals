@@ -1,15 +1,15 @@
 @import '../../constants/colors.scss';
 
 .header {
-  background: $poison-purple;
-  color: $white;
+  background: $primary-color;
+  color: $primary-contrast-color;
   padding: 0.25rem;
   line-height: 1;
 }
 
 .pageTitle {
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 999;
   margin: 0;
   text-align: center;
   text-transform: uppercase;

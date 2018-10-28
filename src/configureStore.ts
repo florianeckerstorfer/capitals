@@ -1,12 +1,10 @@
 /* istanbul ignore file */
 
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import countryReducer from './reducers/countryReducer';
 import roundReducer from './reducers/roundReducer';
-import IReduxWindow from './types/IReduxWindow';
-
-declare let window: IReduxWindow;
 
 const configureStore = () =>
   createStore(
@@ -14,11 +12,7 @@ const configureStore = () =>
       country: countryReducer,
       round: roundReducer,
     }),
-    compose(
-      applyMiddleware(thunk),
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__(),
-    ),
+    composeWithDevTools(applyMiddleware(thunk)),
   );
 
 export default configureStore;

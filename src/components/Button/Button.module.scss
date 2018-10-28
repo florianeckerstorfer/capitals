@@ -1,10 +1,12 @@
-@import '../../constants/colors.scss';
+@import '../../constants/colors';
+@import '../../constants/borders';
 
 .button {
-  background: $poison-purple;
+  background: $primary-color;
+  border-radius: $border-radius;
   border: 0;
-  border-radius: 4px;
-  color: $white;
+  color: $primary-contrast-color;
   font-size: 1.25rem;
-  padding: 0.25rem 1rem;
+  font-weight: bold;
+  padding: 0.5rem 2rem;
 }
