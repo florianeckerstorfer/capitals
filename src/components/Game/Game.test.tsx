@@ -4,18 +4,18 @@ import IStoreState from 'src/types/IStoreState';
 import { Game, mapStateToProps } from './Game';
 
 test('Game should render game when no round is active', () => {
-  const component = shallow(<Game round={0} active={false} points={7} />);
+  const component = shallow(<Game round={0} active={false} />);
   expect(component.exists()).toBeTruthy();
   expect(component.childAt(0).name()).toBe('Connect(NewRound)');
-  expect(component.find('.points').text()).toBe('7');
+  expect(component.find('Connect(Score)').exists()).toBeTruthy();
 });
 
 test('Game should render game when round is active', () => {
-  const component = shallow(<Game round={1} active={true} points={5} />);
+  const component = shallow(<Game round={1} active={true} />);
   expect(component.exists()).toBeTruthy();
   expect(component.childAt(0).name()).toBe('Connect(Round)');
   expect(component.childAt(0).prop('round')).toBe(1);
-  expect(component.find('.points').text()).toBe('5');
+  expect(component.find('Connect(Score)').exists()).toBeTruthy();
 });
 
 test('mapStateToProps() should map state to props with active round', () => {
@@ -32,7 +32,6 @@ test('mapStateToProps() should map state to props with active round', () => {
   };
   const props = mapStateToProps(state);
   expect(props.active).toBe(true);
-  expect(props.points).toBe(18);
 });
 
 test('mapStateToProps() should map state to props with no active round', () => {
@@ -49,5 +48,4 @@ test('mapStateToProps() should map state to props with no active round', () => {
   };
   const props = mapStateToProps(state);
   expect(props.active).toBe(false);
-  expect(props.points).toBe(21);
 });
