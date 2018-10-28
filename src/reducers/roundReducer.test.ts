@@ -1,26 +1,25 @@
 import { answerQuestion, newRoundWithCountries } from '../actions/roundActions';
 import ICountry from '../types/ICountry';
+import IQuestion from '../types/IQuestion';
 import IRoundState from '../types/IRoundState';
-import roundReducer from './roundReducer';
+import roundReducer, { initialState } from './roundReducer';
 
-const initialState: IRoundState = {
-  round: 0,
-  rounds: [],
-};
-
-const question1 = {
+const question1: IQuestion = {
   answers: [
     { answer: 'Vienna', correct: true },
     { answer: 'Berlin', correct: false },
   ],
+  id: 0,
   question: 'Austria',
 };
-const question2 = {
+
+const question2: IQuestion = {
   answers: [
     { answer: 'Paris', correct: true },
     { answer: 'London', correct: false },
   ],
-  question: 'Francce',
+  id: 1,
+  question: 'France',
 };
 
 const countries: ICountry[] = [
@@ -67,7 +66,7 @@ test('roundReducer() should handle ANSWER_QUESTION action for correct answer wit
       },
     ],
   };
-  const newState = roundReducer(state, answerQuestion(1, 0, 0));
+  const newState = roundReducer(state, answerQuestion(1, question1, 0));
   expect(newState.round).toBe(1);
   expect(newState.rounds[0].points).toBe(1);
   expect(newState.rounds[0].currentQuestion).toBe(1);
@@ -87,7 +86,7 @@ test('roundReducer() should handle ANSWER_QUESTION action for correct answer wit
       },
     ],
   };
-  const newState = roundReducer(state, answerQuestion(1, 0, 0));
+  const newState = roundReducer(state, answerQuestion(1, question1, 0));
   expect(newState.round).toBe(1);
   expect(newState.rounds[0].points).toBe(1);
   expect(newState.rounds[0].currentQuestion).toBe(0);
@@ -107,7 +106,7 @@ test('roundReducer() should handle ANSWER_QUESTION action for incorrect answer',
       },
     ],
   };
-  const newState = roundReducer(state, answerQuestion(1, 0, 1));
+  const newState = roundReducer(state, answerQuestion(1, question1, 1));
   expect(newState.round).toBe(1);
   expect(newState.rounds[0].points).toBe(0);
   expect(newState.rounds[0].currentQuestion).toBe(1);
@@ -134,7 +133,7 @@ test('roundReducer() should handle ANSWER_QUESTION action for correct answer wit
       },
     ],
   };
-  const newState = roundReducer(state, answerQuestion(2, 0, 0));
+  const newState = roundReducer(state, answerQuestion(2, question1, 0));
   expect(newState.round).toBe(2);
   expect(newState.rounds[1].points).toBe(1);
   expect(newState.rounds[1].currentQuestion).toBe(1);

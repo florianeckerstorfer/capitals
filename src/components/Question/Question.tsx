@@ -28,7 +28,7 @@ export const Question = ({ question, round, questionIndex }: IProps) => (
           <AnswerOption
             answer={answer}
             round={round}
-            question={questionIndex}
+            question={question}
             position={position}
           />
         </li>

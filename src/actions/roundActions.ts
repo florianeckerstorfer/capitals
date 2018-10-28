@@ -12,7 +12,7 @@ export interface INewRoundAction {
 
 export interface IAnswerQuestion {
   answer: number;
-  question: number;
+  question: IQuestion;
   round: number;
   type: constants.ANSWER_QUESTION;
 }
@@ -35,7 +35,7 @@ export const newRound = () => {
 
 export const answerQuestion = (
   round: number,
-  question: number,
+  question: IQuestion,
   answer: number,
 ): IAnswerQuestion => ({
   answer,

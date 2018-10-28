@@ -36,7 +36,7 @@ const handleAnswerQuestion = (
   action: IAnswerQuestion,
 ): IRoundState => {
   const answer = state.rounds.filter(round => round.id === action.round)[0]
-    .questions[action.question].answers[action.answer];
+    .questions[action.question.id].answers[action.answer];
   const rounds = state.rounds.map(round => {
     if (round.id === action.round) {
       return {

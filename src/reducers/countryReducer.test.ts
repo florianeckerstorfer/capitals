@@ -1,10 +1,5 @@
 import { addCountry, setCountries } from '../actions/countryActions';
-import ICountryState from '../types/IContryState';
-import countryReducer from './countryReducer';
-
-const initialState: ICountryState = {
-  countries: [],
-};
+import countryReducer, { initialState } from './countryReducer';
 
 test('countryReducer() should handle initial state', () => {
   const state = countryReducer();

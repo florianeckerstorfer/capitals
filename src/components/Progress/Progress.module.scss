@@ -1,0 +1,30 @@
+@import '../../constants/colors.scss';
+
+.progress {
+  background-color: $progress-bar-bg;
+  box-sizing: border-box;
+  height: 1.5rem;
+  margin: 1rem 0.5rem;
+  padding: 0.25rem;
+  position: relative;
+  width: calc(100% - 1rem);
+}
+
+.progressBar {
+  background-color: $progress-bar;
+  height: 1.5rem;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  left: 0;
+  line-height: 1.5rem;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
+}

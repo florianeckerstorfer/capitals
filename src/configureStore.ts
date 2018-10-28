@@ -7,6 +7,7 @@ import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import countryReducer from './reducers/countryReducer';
 import roundReducer from './reducers/roundReducer';
+import userReducer from './reducers/userReducer';
 
 const persistConfig = {
   blacklist: ['country'],
@@ -17,6 +18,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   country: countryReducer,
   round: roundReducer,
+  user: userReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,6 +1,7 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import IStoreState from 'src/types/IStoreState';
+import initialState from '../../constants/initialState';
+import IStoreState from '../../types/IStoreState';
 import { Game, mapStateToProps } from './Game';
 
 test('Game should render game when no round is active', () => {
@@ -20,7 +21,7 @@ test('Game should render game when round is active', () => {
 
 test('mapStateToProps() should map state to props with active round', () => {
   const state: IStoreState = {
-    country: { countries: [] },
+    ...initialState,
     round: {
       round: 3,
       rounds: [
@@ -36,7 +37,7 @@ test('mapStateToProps() should map state to props with active round', () => {
 
 test('mapStateToProps() should map state to props with no active round', () => {
   const state: IStoreState = {
-    country: { countries: [] },
+    ...initialState,
     round: {
       round: 3,
       rounds: [

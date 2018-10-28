@@ -1,10 +1,12 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
+import initialState from '../../constants/initialState';
 import { mapStateToProps, Question } from './Question';
 
 test('Question should render question', () => {
   const question = {
     answers: [{ answer: 'Vienna', correct: true }],
+    id: 0,
     question: 'Austria',
   };
   const component = shallow(
@@ -17,9 +19,9 @@ test('Question should render question', () => {
 });
 
 test('mapStateToProps() should map state to props', () => {
-  const question = { question: 'Austria', answers: [] };
+  const question = { question: 'Austria', id: 0, answers: [] };
   const state = {
-    country: { countries: [] },
+    ...initialState,
     round: {
       round: 1,
       rounds: [
