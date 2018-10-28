@@ -1,5 +1,6 @@
 import * as actions from '../constants/actions';
 import ICountry from '../types/ICountry';
+import IQuestion from '../types/IQuestion';
 import {
   answerQuestion,
   newRound,
@@ -20,6 +21,12 @@ const countries: ICountry[] = [
   { name: 'Ukraine', capital: 'Kiev', continents: ['Europe'] },
 ];
 
+const question: IQuestion = {
+  answers: [],
+  id: 0,
+  question: 'Austria',
+};
+
 test('newRoundWithCountries() should return NEW_ROUND action', () => {
   const action = newRoundWithCountries(countries);
   expect(action.type).toBe(actions.NEW_ROUND);
@@ -35,9 +42,9 @@ test('newRound() should dispatch newRoundWithCountres()', () => {
 });
 
 test('answerQuestion() should return ANSWER_QUESTION action', () => {
-  const action = answerQuestion(1, 0, 2);
+  const action = answerQuestion(1, question, 2);
   expect(action.type).toBe(actions.ANSWER_QUESTION);
   expect(action.round).toBe(1);
-  expect(action.question).toBe(0);
+  expect(action.question.id).toBe(0);
   expect(action.answer).toBe(2);
 });

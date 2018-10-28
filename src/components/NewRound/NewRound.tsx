@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import IStoreState from '../../types/IStoreState';
 import NewRoundButton from '../NewRoundButton/NewRoundButton';
+import Progress from '../Progress/Progress';
 import RoundResult from '../RoundResult/RoundResult';
 import * as css from './NewRound.module.scss';
 
@@ -22,6 +23,7 @@ export class NewRound extends React.PureComponent<IProps> {
           <RoundResult />
         )}
         <NewRoundButton />
+        <Progress />
       </div>
     );
   }

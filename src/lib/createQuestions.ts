@@ -1,4 +1,4 @@
-import IAnswer from 'src/types/IAnswer';
+import IAnswer from '../types/IAnswer';
 import ICountry from '../types/ICountry';
 import IQuestion from '../types/IQuestion';
 import shuffle from './shuffle';
@@ -22,8 +22,9 @@ const createQuestions = (countries: ICountry[]): IQuestion[] => {
   return shuffle(countries)
     .slice(0, 10)
     .map(
-      (country: ICountry): IQuestion => ({
+      (country: ICountry, id: number): IQuestion => ({
         answers: shuffle(createAnswers(country, countries)),
+        id,
         question: country.name,
       }),
     );

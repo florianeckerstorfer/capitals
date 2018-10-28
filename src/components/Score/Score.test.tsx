@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
+import initialState from '../../constants/initialState';
 import IStoreState from '../../types/IStoreState';
 import { mapStateToProps, Score } from './Score';
 
@@ -29,7 +30,7 @@ test('Score should render correctly if total points is 0 and total rounds is 0',
 
 test('mapStateToProps() should map state to props', () => {
   const state: IStoreState = {
-    country: { countries: [] },
+    ...initialState,
     round: {
       round: 3,
       rounds: [

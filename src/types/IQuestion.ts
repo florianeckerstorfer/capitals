@@ -3,6 +3,7 @@
 import IAnswer from './IAnswer';
 
 interface IQuestion {
+  id: number;
   question: string;
   answers: IAnswer[];
 }

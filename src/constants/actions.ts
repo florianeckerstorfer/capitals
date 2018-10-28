@@ -9,3 +9,6 @@ export type NEW_ROUND = typeof NEW_ROUND;
 
 export const ANSWER_QUESTION = 'ANSWER_QUESTION';
 export type ANSWER_QUESTION = typeof ANSWER_QUESTION;
+
+export const SAVE_ANSWER = 'SAVE_ANSWER';
+export type SAVE_ANSWER = typeof SAVE_ANSWER;

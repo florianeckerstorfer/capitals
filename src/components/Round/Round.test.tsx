@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
+import initialState from '../../constants/initialState';
 import { mapStateToProps, Round } from './Round';
 
 const round = {
@@ -18,7 +19,7 @@ test('Round should render round', () => {
 
 test('mapStateToProps should map state to props', () => {
   const state = {
-    country: { countries: [] },
+    ...initialState,
     round: { round: 1, rounds: [round] },
   };
   const props = mapStateToProps(state, { round: 1 });

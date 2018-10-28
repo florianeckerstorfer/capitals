@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import * as React from 'react';
 import IRound from 'src/types/IRound';
 import IStoreState from 'src/types/IStoreState';
+import initialState from '../../constants/initialState';
 import { mapStateToProps, RoundResult } from './RoundResult';
 
 test('RoundResult should render result from last round', () => {
@@ -19,7 +20,7 @@ test('RoundResult should render result from last round', () => {
 
 test('mapStateToProps() should map state to props', () => {
   const state: IStoreState = {
-    country: { countries: [] },
+    ...initialState,
     round: {
       round: 1,
       rounds: [
