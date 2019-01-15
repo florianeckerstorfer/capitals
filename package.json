@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@types/classnames": "^2.2.6",
-    "@types/react-redux": "^6.0.9",
+    "@types/react-redux": "^7.0.0",
     "autoprefixer": "9.4.4",
     "axios": "^0.18.0",
     "babel-jest": "20.0.3",
