@@ -1,4 +1,5 @@
 import * as actions from '../constants/actions';
+import initialState from '../constants/initialState';
 import ICountry from '../types/ICountry';
 import IQuestion from '../types/IQuestion';
 import {
@@ -35,7 +36,10 @@ test('newRoundWithCountries() should return NEW_ROUND action', () => {
 
 test('newRound() should dispatch newRoundWithCountres()', () => {
   const dispatch = jest.fn();
-  const getState = jest.fn(() => ({ country: { countries: [] } }));
+  const getState = jest.fn(() => ({
+    ...initialState,
+    country: { ...initialState.country, countries: [] },
+  }));
   newRound()(dispatch, getState);
   expect(dispatch).toHaveBeenCalledTimes(1);
   expect(dispatch.mock.calls[0][0].type).toBe(actions.NEW_ROUND);
