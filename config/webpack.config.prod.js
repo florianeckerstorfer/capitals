@@ -4,7 +4,7 @@ const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('mini-css-extract-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
@@ -52,7 +52,6 @@ const cssLoader = {
   loader: require.resolve('css-loader'),
   options: {
     importLoaders: 1,
-    minimize: true,
     sourceMap: shouldUseSourceMap,
   },
 };
@@ -61,7 +60,6 @@ const cssModuleLoader = {
   loader: require.resolve('css-loader'),
   options: {
     importLoaders: 1,
-    minimize: true,
     modules: true,
     sourceMap: shouldUseSourceMap,
   },
@@ -92,6 +90,7 @@ const postcssLoader = {
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
 module.exports = {
+  mode: 'production',
   // Don't attempt to continue if there are any errors.
   bail: true,
   // We generate sourcemaps in production. This is slow but gives good results.
@@ -209,64 +208,27 @@ module.exports = {
           },
           {
             test: /\.module\.scss$/,
-            loader: ExtractTextPlugin.extract(
-              Object.assign(
-                {
-                  fallback: {
-                    loader: require.resolve('style-loader'),
-                    options: {
-                      hmr: false,
-                    },
-                  },
-                  use: [
-                    cssModuleLoader,
-                    postcssLoader,
-                    require.resolve('sass-loader'),
-                  ],
-                },
-                extractTextPluginOptions,
-              ),
-            ),
+            use: [
+              ExtractTextPlugin.loader,
+              cssModuleLoader,
+              postcssLoader,
+              require.resolve('sass-loader'),
+            ],
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
           {
             test: /\.scss$/,
-            loader: ExtractTextPlugin.extract(
-              Object.assign(
-                {
-                  fallback: {
-                    loader: require.resolve('style-loader'),
-                    options: {
-                      hmr: false,
-                    },
-                  },
-                  use: [
-                    cssLoader,
-                    postcssLoader,
-                    require.resolve('sass-loader'),
-                  ],
-                },
-                extractTextPluginOptions,
-              ),
-            ),
+            use: [
+              ExtractTextPlugin.loader,
+              cssLoader,
+              postcssLoader,
+              require.resolve('sass-loader'),
+            ],
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
           {
             test: /\.module\.css$/,
-            loader: ExtractTextPlugin.extract(
-              Object.assign(
-                {
-                  fallback: {
-                    loader: require.resolve('style-loader'),
-                    options: {
-                      hmr: false,
-                    },
-                  },
-                  use: [cssModuleLoader, postcssLoader],
-                },
-                extractTextPluginOptions,
-              ),
-            ),
+            use: [ExtractTextPlugin.loader, cssModuleLoader, postcssLoader],
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
           // The notation here is somewhat confusing.
@@ -283,20 +245,7 @@ module.exports = {
           // in the main CSS file.
           {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract(
-              Object.assign(
-                {
-                  fallback: {
-                    loader: require.resolve('style-loader'),
-                    options: {
-                      hmr: false,
-                    },
-                  },
-                  use: [cssLoader, postcssLoader],
-                },
-                extractTextPluginOptions,
-              ),
-            ),
+            use: [ExtractTextPlugin.loader, cssLoader, postcssLoader],
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
           // "file" loader makes sure assets end up in the `build` folder.
@@ -326,7 +275,7 @@ module.exports = {
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // In production, it will be an empty string unless you specify "homepage"
     // in `package.json`, in which case it will be the pathname of that URL.
-    new InterpolateHtmlPlugin(env.raw),
+    new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,
@@ -357,10 +306,10 @@ module.exports = {
           // ecma 5 compliant code, to avoid issues with older browsers, this is
           // whey we put `ecma: 5` to the compress and output section
           // https://github.com/facebook/create-react-app/pull/4234
-          ecma: 8,
+          // ecma: 8,
         },
         compress: {
-          ecma: 5,
+          // ecma: 5,
           warnings: false,
           // Disabled because of an issue with Uglify breaking seemingly valid code:
           // https://github.com/facebook/create-react-app/issues/2376
@@ -372,10 +321,10 @@ module.exports = {
           inline: 1,
         },
         mangle: {
-          safari10: true,
+          // safari10: true,
         },
         output: {
-          ecma: 5,
+          // ecma: 5,
           comments: false,
           // Turned on because emoji and regex is not minified properly using default
           // https://github.com/facebook/create-react-app/issues/2488
