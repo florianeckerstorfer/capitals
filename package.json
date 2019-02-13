@@ -95,7 +95,7 @@
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {
-      "^.+\\.(js|jsx|mjs)$": "<rootDir>/config/jest/typescriptTransform.jsi",
+      "^.+\\.(js|jsx|mjs)$": "<rootDir>/config/jest/typescriptTransform.js",
       "^.+\\.tsx?$": "<rootDir>/config/jest/typescriptTransform.js",
       "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
